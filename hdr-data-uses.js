@@ -136,26 +136,29 @@ template.innerHTML = `
 class HDRDataUses extends HTMLElement {
   constructor() {
     super();
-    this.WEB_URL = `http://localhost:3000`;
+    console.log(this.getAttribute("id"), "+++++");
+    this.WEB_URL = `https://web.uat.healthdatagateway.org`;
+    this.API_URL = `https://api.uat.healthdatagateway.org`;
     this.root = this.attachShadow({ mode: "open" });
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
   async connectedCallback() {
     this.renderHeaderHTML();
-    const custodianName = this.getAttribute("id");
+    const custodianName = encodeURIComponent(this.getAttribute("id"));
     if (!custodianName) return this.renderErroMessageHTML();
     try {
-      const response = await fetch(
-        `http://localhost:3001/api/v1/search?search=&datausedatacustodian=${encodeURIComponent(
-          custodianName
-        )}&tab=Datauses`
-      );
+      const URL = `${this.API_URL}/api/v1/search?search=&datausedatacustodian=${custodianName}&tab=Datauses`;
+
+      const response = await fetch(URL);
       const { dataUseRegisterResults } = await response.json();
       const content = this.shadowRoot.querySelector("#content");
       const subHeading = this.shadowRoot.querySelector(".sub-heading");
-
-      subHeading.innerHTML = `${dataUseRegisterResults.data.length} ${custodianName} data uses available on the Health Data Research Innovation Gateway`;
+      subHeading.innerHTML = `${
+        dataUseRegisterResults.data.length
+      } ${decodeURIComponent(
+        custodianName
+      )} data uses available on the Health Data Research Innovation Gateway`;
       const contentArray = this.generateTemplate(dataUseRegisterResults);
       const viewAllURL = `${this.WEB_URL}/search?search=&datausedatacustodian=${custodianName}&tab=Datauses`;
       this.shadowRoot.querySelector(
@@ -164,7 +167,6 @@ class HDRDataUses extends HTMLElement {
 
       contentArray.forEach((e, i) => {
         content.innerHTML += e.content;
-        console.log(e.content);
         const keywordHTML = this.shadowRoot.querySelector(`#keywords-${i}`);
         const datasetTitleHTML = this.shadowRoot.querySelector(
           `#dataset-titles-${i}`
