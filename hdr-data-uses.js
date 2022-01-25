@@ -91,6 +91,7 @@ class HDRDataUses extends LitElement {
         line-height: 20px !important;
         font-weight: 300 !important;
         margin-bottom: 4px !important;
+        margin-right: 5px;
       }
 
       .gray800-14-opacity {
@@ -118,6 +119,8 @@ class HDRDataUses extends LitElement {
         margin-bottom: 4px !important;
         background-color: #f3f3f3;
         color: #3c3c3b !important;
+        margin-right: 3px;
+        margin-left: -1px;
       }
 
       .pad-bottom-24 {
@@ -165,6 +168,7 @@ class HDRDataUses extends LitElement {
     this.API_URL = `https://api.uat.healthdatagateway.org`;
     this.custodianName = this.getAttribute("id");
   }
+  q;
 
   async connectedCallback() {
     super.connectedCallback();
@@ -250,14 +254,14 @@ class HDRDataUses extends LitElement {
                   <div class="gray800-14-opacity col-md-3">Datasets</div>
                   <div class="gray800-14 col-md-9" id="dataset-titles-${i}">
                     ${value.gatewayDatasetsInfo.map((dataset) => {
-                      return html`&nbsp;
-                        <a href="${this.WEB_URL}/dataset/${dataset.pid}">
-                          <div class="badge-tag">${dataset.name}</div>
-                        </a>`;
+                      return html` <a
+                        href="${this.WEB_URL}/dataset/${dataset.pid}"
+                      >
+                        <div class="badge-tag">${dataset.name}</div>
+                      </a>`;
                     })}
                     ${value.nonGatewayDatasets.map((dataset) => {
-                      return html`&nbsp;
-                        <div class="badge-tag">${dataset}</div>`;
+                      return html`<div class="badge-tag">${dataset}</div>`;
                     })}
                   </div>
                 </div>  
