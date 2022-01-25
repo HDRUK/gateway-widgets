@@ -280,7 +280,7 @@ class HDRDataUses extends LitElement {
   render() {
     let content;
     if (!this.custodianName) {
-      content = this.renderErroMessageHTML("Custodian name provided");
+      content = this.renderErroMessageHTML("Custodian name not provided");
     } else {
       const viewAllURL =
         this.data &&
