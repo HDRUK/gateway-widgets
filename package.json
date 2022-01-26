@@ -9,16 +9,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies": {
-    "lit": "^2.0.0"
-  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/simonw/datasette-table.git"
+    "url": "git+https://github.com/HDRUK/gateway-widgets"
   },
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/simonw/datasette-table/issues"
+    "url": "https://github.com/HDRUK/gateway-widgets/issues"
   },
-  "homepage": "https://github.com/simonw/datasette-table#readme"
+  "homepage": "https://github.com/HDRUK/gateway-widgets#readme"
 }
