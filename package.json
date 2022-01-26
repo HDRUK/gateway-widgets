@@ -1,0 +1,24 @@
+{
+  "author": "Jag Kandasamy",
+  "name": "gateway-widgets",
+  "version": "0.0.1",
+  "type": "module",
+  "description": "A Web Component for embedding Data use registers on a page",
+  "main": "hdr-data-uses.js",
+  "module": "hdr-data-uses.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "lit": "^2.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simonw/datasette-table.git"
+  },
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/simonw/datasette-table/issues"
+  },
+  "homepage": "https://github.com/simonw/datasette-table#readme"
+}
