@@ -168,7 +168,6 @@ class HDRDataUses extends LitElement {
     this.API_URL = `https://api.uat.healthdatagateway.org`;
     this.custodianName = this.getAttribute("id");
   }
-  q;
 
   async connectedCallback() {
     super.connectedCallback();
