@@ -2,7 +2,7 @@
 
 Gateway widgets for collaborators
 
-## HDR Data use Web component
+## HDRUK Data use Web component
 
 A Web Component for embedding a [Data uses](https://web.www.healthdatagateway.org/search?search=&tab=Datauses) on a page.
 
@@ -11,7 +11,7 @@ A Web Component for embedding a [Data uses](https://web.www.healthdatagateway.or
 ```html
 <script
   type="module"
-  src="https://unpkg.com/hdr-gateway-widgets-test?module"
+  src="https://unpkg.com/hdruk-gateway-widgets?module"
 ></script>
-<hdr-data-uses id="HEALTH DATA RESEARCH UK"></hdr-data-uses>
+<hdruk-data-uses id="HEALTH DATA RESEARCH UK"></hdruk-data-uses>
 ```

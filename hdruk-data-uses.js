@@ -25,7 +25,7 @@ const FONT_FACES = `@font-face {
   font-display:auto;font-style:normal;font-weight:500;
   }`;
 
-class HDRDataUses extends LitElement {
+class HDRUKDataUses extends LitElement {
   static get styles() {
     return css`
       * {
@@ -209,15 +209,11 @@ class HDRDataUses extends LitElement {
   }
 
   setupFontFaces() {
-    if (
-      document.querySelector(
-        'style[data-description="hdr-data-use-font-faces"]'
-      )
-    ) {
+    if (document.querySelector('style[data-description="hdruk-font-faces"]')) {
       return;
     }
     const style = document.createElement("style");
-    style.dataset.description = "hdr-data-use-font-faces";
+    style.dataset.description = "hdruk-font-faces";
     style.appendChild(document.createTextNode(FONT_FACES));
     document.head.appendChild(style);
   }
@@ -320,4 +316,4 @@ class HDRDataUses extends LitElement {
   }
 }
 
-customElements.define("hdr-data-uses", HDRDataUses);
+customElements.define("hdruk-data-uses", HDRUKDataUses);
