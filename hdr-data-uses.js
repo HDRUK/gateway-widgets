@@ -164,7 +164,7 @@ class HDRDataUses extends LitElement {
   }
   constructor() {
     super();
-    this.WEB_URL = `https://uat.healthdatagateway.org`;
+    this.WEB_URL = `https://web.uat.healthdatagateway.org`;
     this.API_URL = `https://api.uat.healthdatagateway.org`;
     this.custodianName = this.getAttribute("id");
   }
