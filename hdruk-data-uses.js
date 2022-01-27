@@ -153,6 +153,7 @@ class HDRUKDataUses extends LitElement {
       .error {
         margin-top: 30px;
         margin-left: 20px;
+        margin-bottom: 20px;
       }
     `;
   }
