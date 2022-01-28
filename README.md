@@ -11,7 +11,7 @@ A Web Component for embedding a [Data uses](https://web.www.healthdatagateway.or
 ```html
 <script
   type="module"
-  src="https://unpkg.com/hdruk-gateway-widgets-test?module"
+  src="https://unpkg.com/hdruk-gateway-widgets?module"
 ></script>
 <hdruk-data-uses id="HEALTH DATA RESEARCH UK"></hdruk-data-uses>
 ```
