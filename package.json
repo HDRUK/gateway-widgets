@@ -1,7 +1,7 @@
 {
   "author": "Jag Kandasamy",
   "name": "hdruk-gateway-widgets",
-  "version": "0.1.1",
+  "version": "0.0.1",
   "type": "module",
   "description": "A Web Component for embedding Data use registers on a page",
   "main": "hdruk-data-uses.js",
