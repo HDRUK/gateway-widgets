@@ -3,8 +3,7 @@ import {
   css,
   LitElement,
 } from "https://unpkg.com/lit-element/lit-element.js?module";
-import { unsafeHTML } from "https://unpkg.com/lit-html/directives/unsafe-html.js?module";
-const LOADER_GIF = `https://storage.googleapis.com/hdruk-gateway_prod-cms/web-assets/Loader.gif`;
+import GAnalytics from "https://unpkg.com/ganalytics?module";
 const HDR_LOGO = `https://storage.googleapis.com/hdruk-gateway_prod-cms/web-assets/colour.svg`;
 const FONT_FACES = `@font-face {
   font-family:"museo-sans-rounded";
@@ -116,6 +115,8 @@ class HDRUKDataUses extends LitElement {
     }
   }
 
+  ga = GAnalytics("UA-62201190-1");
+
   renderLogo() {
     return html`<div class="logo">
       <div class="col-12"><span class="sponsor">Powered by:</span></div>
@@ -140,6 +141,15 @@ class HDRUKDataUses extends LitElement {
     document.head.appendChild(style);
   }
 
+  handleOnclick() {
+    this.ga.send("event", {
+      ec: "DataUseWidget",
+      ea: "Clicked",
+      el: window.location,
+    });
+    window.location.href = `${this.WEB_URL}/search?search=&datausedatacustodian=${this.custodianName}&tab=Datauses`;
+  }
+
   render() {
     this.setupFontFaces();
     const subHeading =
@@ -147,14 +157,15 @@ class HDRUKDataUses extends LitElement {
       html`${this.data.length} ${decodeURIComponent(this.custodianName)} data
       uses available on the Health Data Research Innovation Gateway`;
     const disabled = this.data && this.data.length ? "" : "disabled";
-    const viewAllURL = html`<br /><a
+    const viewAllURL = html`<br />
+      <button
+        type="button"
         class="btn btn-primary-hdr ${disabled}"
-        href="${this.WEB_URL}/search?search=&datausedatacustodian=${this
-          .custodianName}&tab=Datauses"
-        role="button"
-        aria-disabled="true"
-        >View all data uses
-      </a> `;
+        @click="${this.handleOnclick}"
+        title="View all data uses"
+      >
+        View all data uses
+      </button> `;
 
     return html`
       <link
