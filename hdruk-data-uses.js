@@ -93,6 +93,7 @@ class HDRUKDataUses extends LitElement {
   }
   constructor() {
     super();
+    this.ga = GAnalytics("UA-62201190-1");
     this.WEB_URL = `https://web.uat.healthdatagateway.org`;
     this.API_URL = `https://api.uat.healthdatagateway.org`;
     this.custodianName = this.getAttribute("id");
@@ -114,8 +115,6 @@ class HDRUKDataUses extends LitElement {
       this.renderErroMessageHTML("Oops somethingwent wrong");
     }
   }
-
-  ga = GAnalytics("UA-62201190-1");
 
   renderLogo() {
     return html`<div class="logo">
