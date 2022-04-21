@@ -96,7 +96,7 @@ class HDRUKDataUses extends LitElement {
     this.ga = GAnalytics("UA-62201190-1");
     this.WEB_URL = `https://web.uat.healthdatagateway.org`;
     this.API_URL = `https://api.uat.healthdatagateway.org`;
-    this.custodianName = this.getAttribute("id");
+    this.custodianName = this.getAttribute("publisher");
   }
 
   async connectedCallback() {
