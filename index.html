@@ -2,18 +2,27 @@
 <html lang="en">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script
-      type="module"
-      src="https://unpkg.com/hdruk-gateway-widgets?module"
-    ></script>
+    <script type="module" src="hdruk-data-uses.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
   </head>
 
   <body>
-    <h1>Sample Data use</h1>
-    <hdruk-data-uses publisher="Sample"></hdruk-data-uses>
-    <h1>No Custodian</h1>
-    <hdruk-data-uses></hdruk-data-uses>
-    <h1>HEALTH DATA RESEARCH UK</h1>
-    <hdruk-data-uses publisher="HEALTH DATA RESEARCH UK"></hdruk-data-uses>
+    <div class="p-4">
+      <h3 class="mb-4">Sample Data use</h3>
+      <hdruk-data-uses publisher="Sample"></hdruk-data-uses>
+    </div>
+    <div class="p-4">
+      <h3 class="mb-4">No Custodian</h3>
+      <hdruk-data-uses></hdruk-data-uses>
+    </div>
+    <div class="p-4">
+      <h3 class="mb-4">HEALTH DATA RESEARCH UK</h3>
+      <hdruk-data-uses publisher="HEALTH DATA RESEARCH UK"></hdruk-data-uses>
+    </div>
   </body>
 </html>
