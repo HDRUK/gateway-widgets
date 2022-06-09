@@ -91,7 +91,7 @@ class HDRUKDataUses extends LitElement {
 
   async connectedCallback() {
     super.connectedCallback();
-    console.log(this);
+
     this.data = this.custodianName && (await this.fetchData());
   }
 
@@ -99,12 +99,12 @@ class HDRUKDataUses extends LitElement {
     try {
       const URL = `${this.API_URL}/api/v1/search?search=&datausedatacustodian=${this.custodianName}&tab=Datauses`;
       const response = await fetch(URL);
-      console.log("RESPONSE", response);
       const { dataUseRegisterResults } = await response.json();
+
       return dataUseRegisterResults.data;
     } catch (e) {
       console.error("Error:", e);
-      this.renderErroMessageHTML("Oops somethingwent wrong");
+      this.renderErrorMessageHTML("Oops somethingwent wrong");
     }
   }
 
@@ -117,7 +117,7 @@ class HDRUKDataUses extends LitElement {
     </div>`;
   }
 
-  renderErroMessageHTML(message) {
+  renderErrorMessageHTML(message) {
     return html`<div class="error">${message}</div>`;
   }
 
