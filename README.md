@@ -9,7 +9,6 @@ A Web Component for embedding a [Data uses](https://web.www.healthdatagateway.or
 ### Publishing
 
 ```js
-npm run build
 npm publish
 
 // Targets: https://unpkg.com/hdruk-gateway-widgets
