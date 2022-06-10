@@ -6,7 +6,7 @@ import {
 
 import GAnalytics from "https://unpkg.com/ganalytics?module";
 
-import commonStyles from "./styles.js";
+import commonStyles from "./styles/main.js";
 
 const HDR_LOGO = `https://storage.googleapis.com/hdruk-gateway_prod-cms/web-assets/colour.svg`;
 
@@ -87,6 +87,8 @@ class HDRUKDataUses extends LitElement {
     this.WEB_URL = `https://web.uat.healthdatagateway.org`;
     this.API_URL = `https://api.uat.healthdatagateway.org`;
     this.custodianName = this.getAttribute("publisher");
+
+    console.log("this.custodianName", this.custodianName);
   }
 
   async connectedCallback() {
