@@ -19,7 +19,7 @@ npm publish
 ```html
 <script
   type="module"
-  src="https://unpkg.com/hdruk-gateway-widgets?module"
+  src="https://unpkg.com/hdruk-gateway-widgets/dist/hdruk-data-uses.js"
 ></script>
-<hdruk-data-uses id="HEALTH DATA RESEARCH UK"></hdruk-data-uses>
+<hdruk-data-uses publisher="SAIL"></hdruk-data-uses>
 ```
