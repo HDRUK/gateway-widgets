@@ -3,8 +3,13 @@ import {
   css,
   LitElement,
 } from "https://unpkg.com/lit-element/lit-element.js?module";
+
 import GAnalytics from "https://unpkg.com/ganalytics?module";
+
+import commonStyles from "./styles/main.js";
+
 const HDR_LOGO = `https://storage.googleapis.com/hdruk-gateway_prod-cms/web-assets/colour.svg`;
+
 const FONT_FACES = `@font-face {
   font-family:"museo-sans-rounded";
   src:url("https://use.typekit.net/af/491586/00000000000000003b9b1e2d/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3") format("woff2"),url("https://use.typekit.net/af/491586/00000000000000003b9b1e2d/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3") format("woff"),url("https://use.typekit.net/af/491586/00000000000000003b9b1e2d/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3") format("opentype");
@@ -25,65 +30,50 @@ const FONT_FACES = `@font-face {
 
 class HDRUKDataUses extends LitElement {
   static get styles() {
-    return css`
-      * {
-        font-family: "museo-sans-rounded";
-      }
+    return [
+      commonStyles,
+      css`
+        .logo-wrapper {
+          display: flex;
+          justify-content: flex-end;
+        }
 
-      .logo {
-        margin-left: -10px;
-        margin-top: 5px;
-      }
-      .heading {
-        font-size: 24px;
-        line-height: 20px;
-        color: #29235c;
-      }
-      .sub-heading {
-        font-size: 18px;
-        line-height: 30px;
-        color: #29235c;
-        font-weight: 400;
-      }
-      .sponsor {
-        position: absolute;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 10px;
-        color: #29235c;
-      }
-      .container-body {
-        padding: 25px;
-        background-color: #f6f7f8;
-      }
-      .col {
-        flex-basis: 0;
-        flex-grow: 1;
-        max-width: 100%;
-      }
+        .logo {
+          width: 127px;
+        }
 
-      .btn {
-        font-weight: 100 !important;
-        margin-bottom: 30px;
-      }
-      .btn-primary-hdr {
-        color: #fff;
-        background-color: #475da7;
-        border-color: #475da7;
-        font-size: 14px;
-      }
-      .btn-primary-hdr:hover {
-        color: #fff;
-        background-color: #3c4e8c;
-        border-color: #384983;
-      }
+        .heading {
+          font-size: 24px;
+          line-height: 20px;
+          color: #29235c;
+        }
 
-      .error {
-        margin-top: 30px;
-        margin-left: 20px;
-        margin-bottom: 20px;
-      }
-    `;
+        .sub-heading {
+          font-size: 18px;
+          line-height: 30px;
+          color: #29235c;
+          font-weight: 400;
+        }
+
+        .sponsor {
+          font-style: normal;
+          font-weight: normal;
+          font-size: 11px;
+          color: #29235c;
+        }
+
+        .container-body {
+          padding: 40px;
+          background-color: #f6f7f8;
+        }
+
+        .error {
+          margin-top: 30px;
+          margin-left: 20px;
+          margin-bottom: 20px;
+        }
+      `,
+    ];
   }
   static get properties() {
     return {
@@ -97,10 +87,13 @@ class HDRUKDataUses extends LitElement {
     this.WEB_URL = `https://web.uat.healthdatagateway.org`;
     this.API_URL = `https://api.uat.healthdatagateway.org`;
     this.custodianName = this.getAttribute("publisher");
+
+    console.log("this.custodianName", this.custodianName);
   }
 
   async connectedCallback() {
     super.connectedCallback();
+
     this.data = this.custodianName && (await this.fetchData());
   }
 
@@ -109,24 +102,24 @@ class HDRUKDataUses extends LitElement {
       const URL = `${this.API_URL}/api/v1/search?search=&datausedatacustodian=${this.custodianName}&tab=Datauses`;
       const response = await fetch(URL);
       const { dataUseRegisterResults } = await response.json();
+
       return dataUseRegisterResults.data;
     } catch (e) {
       console.error("Error:", e);
-      this.renderErroMessageHTML("Oops somethingwent wrong");
+      this.renderErrorMessageHTML("Oops somethingwent wrong");
     }
   }
 
   renderLogo() {
     return html`<div class="logo">
-      <div class="col-12"><span class="sponsor">Powered by:</span></div>
-      <br />
-      <div class="col-12">
+      <div class="sponsor">Powered by:</div>
+      <div>
         <img src="${HDR_LOGO}" width="127" height="53" alt="" />
       </div>
     </div>`;
   }
 
-  renderErroMessageHTML(message) {
+  renderErrorMessageHTML(message) {
     return html`<div class="error">${message}</div>`;
   }
 
@@ -151,20 +144,29 @@ class HDRUKDataUses extends LitElement {
 
   render() {
     this.setupFontFaces();
+
+    const formattedCustodianName = this.custodianName
+      ? decodeURIComponent(this.custodianName)
+      : "";
+
     const subHeading =
       this.data &&
-      html`${this.data.length} ${decodeURIComponent(this.custodianName)} data
-      uses available on the Health Data Research Innovation Gateway`;
+      html`${this.data.length} Data uses available to view on the Health Data
+      Research Innovation Gateway`;
+
     const disabled = this.data && this.data.length ? "" : "disabled";
-    const viewAllURL = html`<br />
+
+    const viewAllURL = html`
       <button
         type="button"
-        class="btn btn-primary-hdr ${disabled}"
+        class="btn-hdr btn-primary-hdr"
         @click="${this.handleOnclick}"
         title="View all data uses"
+        ${disabled}
       >
-        View all data uses
-      </button> `;
+        View data uses
+      </button>
+    `;
 
     return html`
       <link
@@ -176,16 +178,17 @@ class HDRUKDataUses extends LitElement {
       <div class="container-body">
         <div class="row">
           <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
-            <div>
-              <span class="heading">Data use register</span>
+            <div class="mb-1">
+              <span class="heading"
+                >${formattedCustodianName} Data Use Register</span
+              >
             </div>
-            <br />
-            <div>
+            <div class="mb-3">
               <span class="sub-heading">${subHeading}</span>
             </div>
             ${viewAllURL}
           </div>
-          <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+          <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 logo-wrapper">
             ${this.renderLogo()}
           </div>
         </div>
