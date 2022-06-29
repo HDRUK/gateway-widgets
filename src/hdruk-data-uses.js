@@ -87,8 +87,6 @@ class HDRUKDataUses extends LitElement {
     this.WEB_URL = this.getAttribute("baseURL");
     this.API_URL = this.getAttribute("apiURL");
     this.custodianName = this.getAttribute("publisher");
-
-    console.log("this.custodianName", this.custodianName);
   }
 
   async connectedCallback() {
