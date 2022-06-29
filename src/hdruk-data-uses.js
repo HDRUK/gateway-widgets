@@ -139,7 +139,10 @@ class HDRUKDataUses extends LitElement {
       ea: "Clicked",
       el: window.location,
     });
-    window.location.href = `${this.WEB_URL}/search?search=&datausedatacustodian=${this.custodianName}&tab=Datauses`;
+    window.open(
+      `${this.WEB_URL}/search?search=&datausedatacustodian=${this.custodianName}&tab=Datauses`,
+      "_blank"
+    );
   }
 
   render() {
@@ -159,6 +162,7 @@ class HDRUKDataUses extends LitElement {
     const viewAllURL = html`
       <button
         type="button"
+        target="_blank"
         class="btn-hdr btn-primary-hdr"
         @click="${this.handleOnclick}"
         title="View all data uses"
