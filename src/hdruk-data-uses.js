@@ -84,11 +84,9 @@ class HDRUKDataUses extends LitElement {
   constructor() {
     super();
     this.ga = GAnalytics("UA-62201190-1");
-    this.WEB_URL = `https://web.uat.healthdatagateway.org`;
-    this.API_URL = `https://api.uat.healthdatagateway.org`;
+    this.WEB_URL = this.getAttribute("baseURL");
+    this.API_URL = this.getAttribute("apiURL");
     this.custodianName = this.getAttribute("publisher");
-
-    console.log("this.custodianName", this.custodianName);
   }
 
   async connectedCallback() {
@@ -99,8 +97,7 @@ class HDRUKDataUses extends LitElement {
 
   async fetchData() {
     try {
-      const URL = `${this.API_URL}/api/v1/search?search=&datausedatacustodian=${this.custodianName}&tab=Datauses`;
-      const response = await fetch(URL);
+      const response = await fetch(this.API_URL);
       const { dataUseRegisterResults } = await response.json();
 
       return dataUseRegisterResults.data;
