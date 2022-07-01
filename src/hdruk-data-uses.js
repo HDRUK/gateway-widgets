@@ -98,9 +98,10 @@ class HDRUKDataUses extends LitElement {
   async fetchData() {
     try {
       const response = await fetch(this.API_URL);
-      const { dataUseRegisterResults } = await response.json();
-
-      return dataUseRegisterResults.data;
+      const {
+        summary: { dataUseRegisterCount },
+      } = await response.json();
+      return dataUseRegisterCount;
     } catch (e) {
       console.error("Error:", e);
       this.renderErrorMessageHTML("Oops somethingwent wrong");
@@ -148,13 +149,10 @@ class HDRUKDataUses extends LitElement {
     const formattedCustodianName = this.custodianName
       ? decodeURIComponent(this.custodianName)
       : "";
+    const subHeading = html`${this.data} Data uses available to view on the
+    Health Data Research Innovation Gateway`;
 
-    const subHeading =
-      this.data &&
-      html`${this.data.length} Data uses available to view on the Health Data
-      Research Innovation Gateway`;
-
-    const disabled = this.data && this.data.length ? "" : "disabled";
+    const disabled = this.data ? "" : "disabled";
 
     const viewAllURL = html`
       <button
