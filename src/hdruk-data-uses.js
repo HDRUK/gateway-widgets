@@ -64,7 +64,7 @@ class HDRUKDataUses extends LitElement {
 
         .container-body {
           padding: 40px;
-          background-color: #f6f7f8;
+          background-color: #ffffff;
         }
 
         .error {
@@ -87,6 +87,9 @@ class HDRUKDataUses extends LitElement {
     this.WEB_URL = this.getAttribute("baseURL");
     this.API_URL = this.getAttribute("apiURL");
     this.custodianName = this.getAttribute("publisher");
+    this.isMobile = window.matchMedia(
+      "only screen and (max-width: 760px)"
+    ).matches;
   }
 
   async connectedCallback() {
@@ -167,16 +170,26 @@ class HDRUKDataUses extends LitElement {
       </button>
     `;
 
-    return html`
-      <link
-        rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-        crossorigin="anonymous"
-      />
-      <div class="container-body">
-        <div class="row">
-          <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+    const content = this.isMobile
+      ? html`<div class="row mb-3">
+            <div class="col-xs-12 col-sm-12">${this.renderLogo()}</div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-xs-12 col-sm-12">
+              <span class="heading"
+                >${formattedCustodianName} Data Use Register</span
+              >
+            </div>
+          </div>
+          <div class="row mb-4">
+            <div class="col-xs-12 col-sm-12">
+              <span class="sub-heading">${subHeading}</span>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-xs-12 col-sm-12">${viewAllURL}</div>
+          </div>`
+      : html`<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
             <div class="mb-1">
               <span class="heading"
                 >${formattedCustodianName} Data Use Register</span
@@ -187,10 +200,19 @@ class HDRUKDataUses extends LitElement {
             </div>
             ${viewAllURL}
           </div>
-          <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 logo-wrapper">
+          <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 logo-wrapper">
             ${this.renderLogo()}
-          </div>
-        </div>
+          </div>`;
+
+    return html`
+      <link
+        rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous"
+      />
+      <div class="container-body">
+        <div class="row">${content}</div>
       </div>
     `;
   }
