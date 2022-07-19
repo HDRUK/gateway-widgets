@@ -64,7 +64,7 @@ class HDRUKDataUses extends LitElement {
 
         .container-body {
           padding: 40px;
-          background-color: #ffffff;
+          background-color: #f6f7f8;
         }
 
         .error {
