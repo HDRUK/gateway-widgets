@@ -38,6 +38,13 @@ class HDRUKDataUses extends LitElement {
           justify-content: flex-end;
         }
 
+        @media only screen and (max-width: 767px) {
+          .logo-wrapper {
+            justify-content: flex-start;
+            margin-top: 1.3rem;
+          }
+        }
+
         .logo {
           width: 127px;
         }
